@@ -1,35 +1,91 @@
-/* reset.css - opinionated lightweight reset
-   Keeps sensible defaults but removes browser inconsistencies
+/* reset.css - minimal reset targeted to elements actually used in index.html
+   Purpose: avoid touching elements not present in the markup while removing common browser inconsistencies
 */
 
-:root { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
-
-html, body { height: 100%; }
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #fff;
-  color: #111;
+/* Box sizing */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-img, picture, video, canvas, svg { display: block; max-width: 100%; }
+/* Page basics */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-input, button, textarea, select { font: inherit; }
+/* Structural elements used */
+main,
+section,
+div {
+  display: block;
+}
 
-a { color: inherit; text-decoration: none; }
+/* Images used in the markup */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
-ul, ol { list-style: none; }
+/* Form elements present in the markup */
+form {
+  margin: 0;
+}
+label {
+  display: block;
+}
+input {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+input::-ms-clear {
+  display: none;
+}
+input[type="text"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
 
-button { background: transparent; border: 0; padding: 0; }
+/* Headings and text used */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: inherit;
+}
+p {
+  margin: 0;
+}
 
-table { border-collapse: collapse; border-spacing: 0; }
+/* Inline elements used */
+span,
+small {
+  display: inline-block;
+}
 
-/* Utility helpers developers often need */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px; width: 1px; overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px); white-space: nowrap;
+/* Small utilities referenced by the project */
+.hidden {
+  display: none !important;
 }
