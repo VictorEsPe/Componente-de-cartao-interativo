@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Interactive card details form</title>
+  </head>
+  <body>
+    <main>
+      <section class="card-visualizer">
+        <div class="card-front">
+          <img
+            src="./images/card-logo.svg"
+            alt="Logo do cartão"
+            class="card-logo"
+          />
+          <span class="card-number">0000 0000 0000 0000</span>
+          <div class="card-bottom">
+            <span class="card-name">JANE APPLESEED</span>
+            <span class="card-expiry">00/00</span>
+          </div>
+        </div>
+
+        <div class="card-back">
+          <span class="card-cvc">000</span>
+        </div>
+      </section>
+
+      <section class="card-form">
+        <form>
+          <div class="form-group">
+            <label for="cardholder-name">CARDHOLDER NAME</label>
+            <input
+              type="text"
+              id="cardholder-name"
+              placeholder="e.g. Jane Appleseed"
+            />
+            <small class="error-message" id="name-error"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="card-number">CARD NUMBER</label>
+            <input
+              type="text"
+              id="card-number"
+              placeholder="e.g. 1234 5678 9123 0000"  
+              maxlength="16"
+              inputmode="numeric"
+            />
+            <small class="error-message" id="number-error"></small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expiry-date">EXP. DATE (MM/YY)</label>
+
+              <div class="expiry-date-subgroup">
+                <input
+                  type="text"
+                  id="expiry-month"
+                  placeholder="MM"
+                  maxlength="2"
+                  inputmode="numeric"
+                />
+                <input
+                  type="text"
+                  id="expiry-year"
+                  placeholder="YY"
+                  maxlength="2"
+                  inputmode="numeric"
+                />
+              </div>
+
+              <small class="error-message" id="expiry-error"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="cvc">CVC</label>
+              <input
+                type="text"
+                id="cvc"
+                placeholder="e.g. 123"
+                maxlength="3"
+                inputmode="numeric"
+              />
+              <small class="error-message" id="cvc-error"></small>
+          </div>
+
+          <button type="submit" class="submit-btn">Confirm</button>
+        </form>
+      </section>
+
+      <section class="confirmation-section hidden">
+        <img src="./images/icon-complete.svg" alt="Ícone de check">
+        <h2 class="confirmation-title">Thank you!</h2>
+        <p class="confirmation-message">We've added your card details.</p>
+        <!-- TODO: Este botão deve resetar a página toda -->
+        <button class="continue-btn">Continue</button>
+      </section>
+    </main>
+  </body>
+</html>
