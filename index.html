@@ -12,7 +12,7 @@
       href="./images/favicon-32x32.png"
     />
 
-    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/variables.css" />
     <link rel="stylesheet" href="./css/style.css" />
 
@@ -23,21 +23,21 @@
       <section class="card-visualizer">
         <div class="card-wrapper">
           <div class="card-front">
-          <img
-            src="./images/card-logo.svg"
-            alt="Logo do cartão"
-            class="card-logo"
-          />
-          <span class="card-number">0000 0000 0000 0000</span>
-          <div class="card-bottom">
-            <span class="card-name">JANE APPLESEED</span>
-            <span class="card-expiry">00/00</span>
+            <img
+              src="./images/card-logo.svg"
+              alt="Logo do cartão"
+              class="card-logo"
+            />
+            <span class="card-number">0000 0000 0000 0000</span>
+            <div class="card-bottom">
+              <span class="card-name">JANE APPLESEED</span>
+              <span class="card-expiry">00/00</span>
+            </div>
           </div>
-        </div>
 
-        <div class="card-back">
-          <span class="card-cvc">000</span>
-        </div>
+          <div class="card-back">
+            <span class="card-cvc">000</span>
+          </div>
         </div>
       </section>
 
@@ -58,7 +58,7 @@
             <input
               type="text"
               id="card-number"
-              placeholder="e.g. 1234 5678 9123 0000"  
+              placeholder="e.g. 1234 5678 9123 0000"
               maxlength="16"
               inputmode="numeric"
             />
@@ -99,18 +99,18 @@
                 inputmode="numeric"
               />
               <small class="error-message" id="cvc-error"></small>
+            </div>
           </div>
-
-          <button type="submit" class="submit-btn">Confirm</button>
+          <button type="submit" class="submit-btn btn">Confirm</button>
         </form>
       </section>
 
       <section class="confirmation-section hidden">
-        <img src="./images/icon-complete.svg" alt="Ícone de check">
+        <img src="./images/icon-complete.svg" alt="Ícone de check" />
         <h2 class="confirmation-title">Thank you!</h2>
         <p class="confirmation-message">We've added your card details.</p>
         <!-- TODO: Este botão deve resetar a página toda -->
-        <button class="continue-btn">Continue</button>
+        <button class="continue-btn btn">Continue</button>
       </section>
     </main>
 
