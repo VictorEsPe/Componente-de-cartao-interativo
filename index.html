@@ -14,13 +14,15 @@
 
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/style.css" />
 
     <title>Interactive card details form</title>
   </head>
   <body>
     <main>
       <section class="card-visualizer">
-        <div class="card-front">
+        <div class="card-wrapper">
+          <div class="card-front">
           <img
             src="./images/card-logo.svg"
             alt="Logo do cartão"
@@ -35,6 +37,7 @@
 
         <div class="card-back">
           <span class="card-cvc">000</span>
+        </div>
         </div>
       </section>
 
@@ -110,5 +113,7 @@
         <button class="continue-btn">Continue</button>
       </section>
     </main>
+
+    <script src="./js/index.js"></script>
   </body>
 </html>

@@ -1,0 +1,59 @@
+.card-visualizer {
+    background: url(../images/bg-main-mobile.png) no-repeat center;
+    background-size: cover;
+    height: 240px;
+    margin-bottom: 5.625rem;
+    display: flex;
+    justify-content: center;
+}
+
+.card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 285px;
+    height: 200px
+}
+
+.card-front {
+    position: absolute;
+    top: 140px;
+    width: 85%;
+    height: 135px;
+    background: url(../images/bg-card-front.png) no-repeat center;
+    border-radius: .5rem;
+    color: var(--color-white);
+    padding: 0.625rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.card-front .card-logo {
+    width: 50px;
+}
+
+.card-front .card-bottom {
+    font-size: 0.625rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-back {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 85%;
+    height: 135px;
+    background: url(../images/bg-card-back.png) no-repeat center;
+    background-size: contain;
+    border-radius: .5rem;
+    color: var(--color-white);
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1.875rem;
+    font-size: 0.625rem;
+}
