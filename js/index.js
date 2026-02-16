@@ -11,13 +11,14 @@ const inputCardCvc = document.querySelector("#cvc");
 
 const form = document.querySelector("#form");
 
+const cardExpDateInputs = [inputCardExpiryMonth, inputCardExpiryYear];
+
 // Expressão regular para verificar se há caracteres inválidos (qualquer coisa que não seja um número)
 const isThereInvalidCaracters = /[^0-9 ]/;
 const isThereInvalidCaractersAndSpaces = /[^0-9]/;
+const isValidName = /^\p{L}[\p{L} '-]*$/u;
 
 inputCardHolderName.addEventListener("input", () => {
-  const isValidName = /^[\p{L} ]*$/u;
-
   const cardNameValue = inputCardHolderName.value;
 
   if (isValidName.test(cardNameValue)) {
@@ -63,8 +64,6 @@ inputCardNumber.addEventListener("blur", () => {
     triggerErrorSate(inputCardNumber, "number-error", "Must be 16 digits.");
   }
 });
-
-const cardExpDateInputs = [inputCardExpiryMonth, inputCardExpiryYear];
 
 cardExpDateInputs.forEach((input) => {
   input.addEventListener("input", () => {
@@ -114,14 +113,19 @@ inputCardCvc.addEventListener("blur", () => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  alert("Form submitted!");
+
+  validateName();
+  validateCardNumber();
+  validateCvc();
+  validateExpDate();
 });
 
 function triggerErrorSate(inputElement, errorSpan, message) {
   const errorElement = document.querySelector(`#${errorSpan}`);
 
-  if (!errorElement.textContent && !inputElement.classList.contains("error")) {
-    errorElement.textContent = message;
+  errorElement.textContent = message;
+
+  if (!inputElement.classList.contains("error")) {
     inputElement.classList.add("error");
   }
 }
@@ -132,4 +136,136 @@ function clearErrorState(inputElement, errorSpan) {
     errorElement.textContent = "";
     inputElement.classList.remove("error");
   }
+}
+
+function validateName() {
+  const cardNameValue = inputCardHolderName.value.trim();
+  if (!isValidName.test(cardNameValue) && cardNameValue !== "") {
+    triggerErrorSate(
+      inputCardHolderName,
+      "name-error",
+      "Can't submit invalid name.",
+    );
+  } else if (cardNameValue === "") {
+    triggerErrorSate(inputCardHolderName, "name-error", "Can't be blank.");
+  } else if (cardNameValue.length < 2) {
+    triggerErrorSate(
+      inputCardHolderName,
+      "name-error",
+      "Name must be at least 2 characters long.",
+    );
+  } else {
+    clearErrorState(inputCardHolderName, "name-error");
+  }
+}
+
+function validateCardNumber() {
+  const inputNumberValue = inputCardNumber.value.replace(/\s/g, ""); // Remove espaços para validação
+  if (isThereInvalidCaracters.test(inputNumberValue)) {
+    triggerErrorSate(
+      inputCardNumber,
+      "number-error",
+      "Can't submit invalid card number.",
+    );
+  } else if (inputNumberValue === "") {
+    triggerErrorSate(inputCardNumber, "number-error", "Can't be blank.");
+  } else if (inputNumberValue.length < 16) {
+    triggerErrorSate(
+      inputCardNumber,
+      "number-error",
+      "Card number must be 16 digits long.",
+    );
+  } else {
+    clearErrorState(inputCardNumber, "number-error");
+  }
+}
+
+function validateCvc() {
+  const inputCvcValue = inputCardCvc.value.trim();
+
+  if (isThereInvalidCaractersAndSpaces.test(inputCvcValue)) {
+    triggerErrorSate(inputCardCvc, "cvc-error", "Can't submit invalid CVC.");
+  } else if (inputCvcValue === "") {
+    triggerErrorSate(inputCardCvc, "cvc-error", "Can't be blank.");
+  } else if (inputCvcValue.length < 3) {
+    triggerErrorSate(inputCardCvc, "cvc-error", "CVC must be 3 digits long.");
+  } else {
+    clearErrorState(inputCardCvc, "cvc-error");
+  }
+}
+
+// criar função maior para englobar as outras
+function validateExpDate() {
+ const areValidDateCharacters = validateDateCharacters();
+
+  if (areValidDateCharacters) {
+    const date = new Date();
+    const currentMonth = date.getMonth() + 1;
+    const currentYear = date.getFullYear() % 100;
+
+    const month = validateExpMonth();
+    const year = validateExpYear(currentYear);
+
+    if (month === currentMonth && year === currentYear) {
+      triggerErrorSate(
+        inputCardExpiryYear,
+        "expiry-error",
+        "Your card is expired.",
+      );
+    }
+  }
+}
+
+// criar função para validar caracters
+function validateDateCharacters() {
+  for (const input of cardExpDateInputs) {
+    const inputValue = input.value.trim();
+
+    if (isThereInvalidCaractersAndSpaces.test(inputValue)) {
+      triggerErrorSate(
+        input,
+        "expiry-error",
+        "Can't submit invalid characters.",
+      );
+      return false;
+    }
+    if (inputValue === "") {
+      triggerErrorSate(input, "expiry-error", "Can't be blank.");
+      return false;
+    }
+    if (inputValue.length < 2) {
+      triggerErrorSate(input, "expiry-error", "Must be 2 digits.");
+      return false;
+    }
+  }
+  return true;
+}
+
+// criar função validando o mês (1-12)
+function validateExpMonth() {
+  const monthInt = parseInt(inputCardExpiryMonth.value);
+  if (monthInt < 1 || monthInt > 12) {
+    triggerErrorSate(inputCardExpiryMonth, "expiry-error", "Month must be between 1 and 12.");
+  } else {
+    clearErrorState(inputCardExpiryMonth, "expiry-error");
+    return monthInt;
+  }
+}
+// criar função validando o ano (deve ser maior ou igual ao ano atual)
+function validateExpYear(currentYear) {
+  const yearInt = parseInt(inputCardExpiryYear.value);
+
+  if (yearInt < currentYear) {
+    triggerErrorSate(inputCardExpiryYear, "expiry-error", "Your card is expired.");
+  } else {
+    clearErrorState(inputCardExpiryYear, "expiry-error");
+    return yearInt;
+  }
+}
+
+function showCompletionMessage() {
+  const formContainer = document.querySelector(".card-form");
+  const completionMessage = document.querySelector(".confirmation-section");
+  formContainer.classList.add("hidden");
+  completionMessage.classList.remove("hidden");
 }
