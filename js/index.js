@@ -8,6 +8,7 @@ const inputCardNumber = document.querySelector("#card-number");
 const inputCardExpiryMonth = document.querySelector("#expiry-month");
 const inputCardExpiryYear = document.querySelector("#expiry-year");
 const inputCardCvc = document.querySelector("#cvc");
+const resetFormBtn = document.querySelector(".reset-btn");
 
 const form = document.querySelector("#form");
 
@@ -119,7 +120,14 @@ form.addEventListener("submit", (e) => {
   const isCvcValid = validateCvc();
   const isExpDateValid = validateExpDate();
 
-  console.log(isExpDateValid);
+  
+  if (isNameValid && isCardNumberValid && isCvcValid && isExpDateValid) {
+    showCompletionMessage();
+  }
+});
+
+resetFormBtn.addEventListener("click", () => {
+  resetForm();
 });
 
 function triggerErrorSate(inputElement, errorSpan, message) {
@@ -301,4 +309,16 @@ function showCompletionMessage() {
   const completionMessage = document.querySelector(".confirmation-section");
   formContainer.classList.add("hidden");
   completionMessage.classList.remove("hidden");
+}
+
+function resetForm() {
+  form.reset();
+  cardHolderName.textContent = "JANE APPLESEED";
+  cardNumber.textContent = "0000 0000 0000 0000";
+  cardExpDate.textContent = "00/00";
+  cardCvc.textContent = "000";
+  const formContainer = document.querySelector(".card-form");
+  const completionMessage = document.querySelector(".confirmation-section");
+  formContainer.classList.remove("hidden");
+  completionMessage.classList.add("hidden");
 }
