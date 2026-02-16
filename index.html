@@ -41,13 +41,14 @@
       </section>
 
       <section class="card-form">
-        <form>
+        <form id="form">
           <div class="form-group">
             <label for="cardholder-name">CARDHOLDER NAME</label>
             <input
               type="text"
               id="cardholder-name"
               placeholder="e.g. Jane Appleseed"
+              maxlength="30"
             />
             <small class="error-message" id="name-error"></small>
           </div>
@@ -66,7 +67,7 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="expiry-date">EXP. DATE (MM/YY)</label>
+              <label for="expiry-month">EXP. DATE (MM/YY)</label>
 
               <div class="expiry-date-subgroup">
                 <input

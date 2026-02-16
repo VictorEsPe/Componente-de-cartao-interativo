@@ -35,6 +35,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
+  text-transform: uppercase;
 }
 
 .card-front .card-logo {
@@ -142,13 +143,14 @@ form input::placeholder {
   background: var(--color-primary-end);
 }
 
-input.error {
+input.error,
+input.error:focus {
   border: 2px solid var(--color-error);
 }
 
 .error-message {
   color: var(--color-error);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   margin-top: 0.25rem;
 }
 
